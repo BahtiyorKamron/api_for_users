@@ -14,16 +14,11 @@ app.get('/',(req,res)=>{
 })
 app.post("/users",(req,res)=>{
     
-    if( !req.body.name || !req.body.phone || !req.body.id || !req.body){
-       res.json({
-         msg: "Kamchilik bor"
-       })
-    }else{
       let a = write(path.join(process.cwd(),"data","users.json"),req.body)
       res.json({
         msg:a
       })
-    }
+
 })
 app.get("/users",(req,res)=>{
   if(!read(path.join(process.cwd(),"data","users.json")).length){
@@ -68,7 +63,7 @@ app.delete('/courses/:id',(req,res)=>{
      })
    }else{
      let data = read(path.join(process.cwd(),"data",'courses.json'))
-     
+
      let course = data.find(el => el.id==req.params.id)
      if(!course){
        res.json({
